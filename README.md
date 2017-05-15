@@ -1,6 +1,6 @@
-#select_sys
+# select_sys
 
-##install
+## install
 
 ``` $ git clone https://github.com/zz860926/select_sys.git
     $ cd select_sys 
