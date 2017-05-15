@@ -1,0 +1,36 @@
+{
+  "name": "select_sys",
+  "version": "0.0.1",
+  "description": "連接mongodb的網頁版檢索系統",
+  "main": "select_sys.js",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^2.0.1",
+    "koa-router": "^7.0.1",
+    "koa-static": "^3.0.0",
+    "mongodb": "2.2.26"
+  },
+  "debDepencies":{},
+  "scripts":{},
+  "repository": {},
+  "keywords": []
+,
+  "homepage": "https://github.com/zz860926/select_sys",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zz860926/select_sys.git"
+  },
+  "contributors":
+   [
+     {"name": "Fong-An Liu"
+     ,"email": "zz860926@gmail.com/"
+     }
+  , {"name": "Chung-Chen Chen",
+      "email": "ccckmit@gmail.com"   
+     }
+   ],
+  
+  
+   "license": "UNLICENSED"
+}
