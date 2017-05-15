@@ -1,6 +1,6 @@
-# select_sys
+# 網頁版檢索系統(select_sys)
 
-## install
+## 安裝
 ``` 
     $ git clone https://github.com/zz860926/select_sys.git
     $ cd select_sys 
