@@ -4,7 +4,7 @@ var content
 async function main () {
    f6.route(/^$/, input)
        .route(/^post\/list/, list)
-       .route(/^post\/(\w+?)/, show)
+       .route(/^post\/(\w+?)/, table)
        .route(/^post/, search)
     await f6.onload(init)
 }
@@ -14,42 +14,41 @@ async function main () {
  }
 
  async function input () {
-   content.innerHTML = `
-   <form>
+   content.innerHTML =`
+  <div class= "content">
+  <div class ="leftContent" >
+     <form>
     按人查詢：
    <p><input id="search_name" placeholder="請輸入人名。" name="姓名"></p>
    <p><input id="search_birthplace" placeholder="請輸入出生地。" name="出生地"></p>
       <p><input type="button" value="Search" onclick="search()"></p>
    </form>
-
- `
+   </div>
+`
  }
 
 
  async function search () {
   try{
-   var post = {
+   var search = {
       姓名:f6.one('#search_name').value,
       出生地:f6.one('#search_birthplace').value,
-      // 生年:f6.one('#search_birthyear').value
     }
-    if(!post.姓名){delete post.姓名};
-    if(!post.出生地){delete post.出生地};
-   console.log(`search:post=${JSON.stringify(post)}`)
-   await f6.ojax({method: 'POST', url: '/post'}, post)
- //  posts.push(post)
-
-  //  await f6.go('post/list') // list #
-  await list ()
+    if(!search.姓名){delete search.姓名};
+    if(!search.出生地){delete search.出生地};
+  //  console.log(`search:post=${JSON.stringify(post)}`)
+   await f6.ojax({method: 'POST', url: '/post'}, search)
+   await list()
+    //  f6.go('post/list') // list #
   }catch(error){
     console.log(error.stack)
   } 
 }
 
-async function show (m) {
+async function table (m) {
   var id = parseInt(m[1])//?
   var post = await f6.ojax({method: 'GET', url: `/post/${id}`})
-  var postString = JSON.stringify(post)
+  // var postString = JSON.stringify(post)
   
   content.innerHTML =`
   <table border = "1">
@@ -60,7 +59,7 @@ async function show (m) {
   <tr>
   <td>${post.姓名}<td>${post.出生地}<td>${post.生年}<td>${post.卒年}
   </table>
-  <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html#post/list'">  
+  <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html'">  
   `
 }
 
@@ -68,6 +67,16 @@ async function list () {
   var posts = await f6.ojax({method: 'GET', url: '/'})
   console.log("posts="+posts)
   content.innerHTML =`
+  <div class= "content">
+  <div class ="leftContent" >
+     <form>
+    按人查詢：
+   <p><input id="search_name" placeholder="請輸入人名。" name="姓名"></p>
+   <p><input id="search_birthplace" placeholder="請輸入出生地。" name="出生地"></p>
+      <p><input type="button" value="Search" onclick="search()"></p>
+   </form>
+   </div>
+<div class ="rightContent">
   <h1>查詢結果</h1>
   <p>有一個 <strong>${posts.length}</strong>查詢結果</p>
   <ul id="posts">
@@ -76,16 +85,11 @@ async function list () {
         <p><a href="#post/${post._id}">${post.姓名}</a></p>
       </li>
     `).join('\n')}
-  </ul>
-  
-   <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html'">  
+  </ul> 
+  </div>
+  <div class="clearFloat"></div>
+  </div>
   `
 }
 
-// function f( value) {
-//   if (typeof value === "number") {
-//     value = 1 * value;
-//   }
-//   return value;
-// }
 main()

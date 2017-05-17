@@ -1,41 +1,24 @@
-var MongoClient = require('mongodb').MongoClient; 
-var DB_CONN_STR = 'mongodb://localhost:27017/mydb'; 
-
 var Koa = require('koa')
 var Router = require('koa-router')
 var logger = require('koa-logger')
 var bodyParser = require('koa-bodyparser')
 var koaStatic = require('koa-static')
+var mongodb = require('mongodb')
 
 var app = new Koa()
 var router = new Router()
 app.use(bodyParser())
 
-
-var posts = {}
-var results
+var db,collection
+var input = {}
+var results = []
 app.use(logger())
 
 router
    .get('/', listPost)
    .get('/post/:id', getPost)
-   .post('/post', createPost)
+   .post('/post', searchdb)
  
- async function selectData  (db) {  
-    //连接到表  
-    var collection = db.collection('newdb');
-    //查询数据
-    var whereStr = posts;
-    var result = await collection.find(whereStr).toArray()
-    results = result
-       for(var i = 0; i <=results.length;i++){
-         results[i]._id =i; 
-       }
-     
-      console.log(result);
-      db.close(); 
-  
-}
 
 async function listPost (ctx) {
   ctx.body = JSON.stringify(results);  
@@ -49,21 +32,27 @@ async function getPost (ctx) {
   ctx.body = await JSON.stringify(post)
 }
 
-async function createPost (ctx) {
+async function searchdb (ctx) {
   console.log('createPost:rawBody=%s', ctx.request.rawBody)
   console.log('createPost:body=%j', ctx.request.body)
-  var post = ctx.request.body
-    posts = post
+   input = ctx.request.body
+  try{
+       results = await collection.find(input).toArray()
+        // for(var i = 0; i <=results.length;i++){
+        //   results[i].id = i; 
+        // }
+      console.log(results);
+    }catch(error){
+        console.log(error)
+     } 
 
-MongoClient.connect(DB_CONN_STR, function(err, db) {
-      if(err){return console.dir(err);}
-     selectData(db)
-   });
-
-
-  //  var id = posts.push(post) - 1
-  // post.id = id
-  ctx.body =  JSON.stringify(post)
+  ctx.body =  JSON.stringify(results)
 }
 
-app.use(router.routes()).use(koaStatic('../')).listen(3000)
+async function main () {
+  db = await mongodb.MongoClient.connect('mongodb://127.0.0.1:27017/mydb')
+  collection = await db.collection('newdb')
+  app.use(router.routes()).use(koaStatic('../')).listen(3000)
+}
+
+main()
