@@ -4,7 +4,7 @@ var content
 async function main () {
    f6.route(/^$/, input)
        .route(/^post\/list/, list)
-       .route(/^post\/(\w+?)/, table)
+       .route(/^post\/(\w+)/, table)
        .route(/^post/, search)
     await f6.onload(init)
 }
@@ -38,8 +38,10 @@ async function main () {
     if(!search.出生地){delete search.出生地};
   //  console.log(`search:post=${JSON.stringify(post)}`)
    await f6.ojax({method: 'POST', url: '/post'}, search)
-   await list()
-    //  f6.go('post/list') // list #
+   // await list()
+  //  alert('before') 
+   await f6.go('post/list') // list #
+  //  alert('after')
   }catch(error){
     console.log(error.stack)
   } 
@@ -75,7 +77,7 @@ async function list () {
 }
 
 async function table (m) {
-  var id = parseInt(m[1])//?
+  var id = m[1]
   var show = await f6.ojax({method: 'GET', url: `/post/${id}`})
   
   content.innerHTML =`

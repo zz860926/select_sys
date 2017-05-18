@@ -27,10 +27,10 @@ async function listPost (ctx) {
 async function getPost (ctx) {
   try{
     var id = ctx.params.id
-     console.log('getpost: id=%s', id)
+    //  console.log('getpost: id=%s results=%j', id, results)
     //  var post = results[id]
     var post
-    for(var i = 0; i<=results.length; i++){
+    for(var i = 0; i<results.length; i++){
       var _id = results[i]._id
       if(_id == id){
       post = results[i]
