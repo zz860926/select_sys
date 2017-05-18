@@ -25,11 +25,21 @@ async function listPost (ctx) {
 }
 
 async function getPost (ctx) {
-  var id = parseInt(ctx.params.id)
-  // console.log('getpost: id=%d posts=%j', id, results)
-  var post = results[id]
-  if (!post) ctx.throw(404, 'invalid post id')
-  ctx.body = await JSON.stringify(post)
+  try{
+    var id = ctx.params.id
+     console.log('getpost: id=%s', id)
+    var post
+    for(var i = 0; i<=results.length; i++){
+      var _id = results[i]._id
+      if(_id == id){
+      post = results[i]
+      }
+    }
+    if (!post) ctx.throw(404, 'invalid post id')
+    ctx.body = await JSON.stringify(post)
+  }catch(error){
+    console.log(error)
+  }
 }
 
 async function searchdb (ctx) {

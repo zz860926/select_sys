@@ -45,24 +45,6 @@ async function main () {
   } 
 }
 
-async function table (m) {
-  var id = parseInt(m[1])//?
-  var post = await f6.ojax({method: 'GET', url: `/post/${id}`})
-  // var postString = JSON.stringify(post)
-  
-  content.innerHTML =`
-  <table border = "1">
-  <tr>
-  <th colspan ="4">查詢列表
-  <tr>
-  <th>姓名 <th>出生地 <th>生年 <th>卒年
-  <tr>
-  <td>${post.姓名}<td>${post.出生地}<td>${post.生年}<td>${post.卒年}
-  </table>
-  <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html'">  
-  `
-}
-
 async function list () {
   var posts = await f6.ojax({method: 'GET', url: '/'})
   console.log("posts="+posts)
@@ -89,6 +71,23 @@ async function list () {
   </div>
   <div class="clearFloat"></div>
   </div>
+  `
+}
+
+async function table (m) {
+  var id = parseInt(m[1])//?
+  var show = await f6.ojax({method: 'GET', url: `/post/${id}`})
+  
+  content.innerHTML =`
+  <table border = "1">
+  <tr>
+  <th colspan ="4">查詢列表
+  <tr>
+  <th>姓名 <th>出生地 <th>生年 <th>卒年
+  <tr>
+  <td>${show.姓名}<td>${show.出生地}<td>${show.生年}<td>${show.卒年}
+  </table>
+  <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html'">  
   `
 }
 
