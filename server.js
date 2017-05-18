@@ -28,6 +28,7 @@ async function getPost (ctx) {
   try{
     var id = ctx.params.id
      console.log('getpost: id=%s', id)
+    //  var post = results[id]
     var post
     for(var i = 0; i<=results.length; i++){
       var _id = results[i]._id
@@ -51,7 +52,7 @@ async function searchdb (ctx) {
         // for(var i = 0; i <=results.length;i++){
         //   results[i].id = i; 
         // }
-      console.log(results);
+      // console.log(results);
     }catch(error){
         console.log(error)
      } 
