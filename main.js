@@ -41,6 +41,7 @@ async function main () {
 
     if(!search.姓名){delete search.姓名};
     if(!search.出生地){delete search.出生地};
+<<<<<<< HEAD
     if(!search.生年){delete search.生年};
     if(!search.卒年){delete search.卒年};
   //  console.log(`search:post=${JSON.stringify(post)}`)
@@ -49,6 +50,12 @@ async function main () {
   //  alert('before') 
    await f6.go('list') // list #
   //  alert('after')
+=======
+  //  console.log(`search:post=${JSON.stringify(search)}`)
+   await f6.ojax({method: 'POST', url: '/post'}, search)
+   // await list()
+   await f6.go('list') // list #
+>>>>>>> 502ecb4f02346f43768840b7843e7a1f1ac1705e
   }catch(error){
     console.log(error.stack)
   } 
