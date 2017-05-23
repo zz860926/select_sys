@@ -3,9 +3,9 @@ var content
 
 async function main () {
    f6.route(/^$/, input)
-       .route(/^post\/list/, list)
-       .route(/^post\/(\w+)/, table)
-       .route(/^post/, search)
+       .route(/^list/, list)
+       .route(/^table\/(\w+)/, table)
+       .route(/^search/, search)
     await f6.onload(init)
 }
 
@@ -21,6 +21,8 @@ async function main () {
     按人查詢：
    <p><input id="search_name" placeholder="請輸入人名。" name="姓名"></p>
    <p><input id="search_birthplace" placeholder="請輸入出生地。" name="出生地"></p>
+   <p><input id="search_birthyear" placeholder="請輸入生年。" name="生年"></p>
+   <p><input id="search_dieyear" placeholder="請輸入卒年。" name="卒年"></p>
       <p><input type="button" value="Search" onclick="search()"></p>
    </form>
    </div>
@@ -31,16 +33,21 @@ async function main () {
  async function search () {
   try{
    var search = {
-      姓名:f6.one('#search_name').value,
+      姓名:{"$regex":".*"+f6.one('#search_name').value+".*"},
       出生地:f6.one('#search_birthplace').value,
+      生年:parseInt(f6.one('#search_birthyear').value),
+      卒年:parseInt(f6.one('#search_dieyear').value)
     }
+
     if(!search.姓名){delete search.姓名};
     if(!search.出生地){delete search.出生地};
+    if(!search.生年){delete search.生年};
+    if(!search.卒年){delete search.卒年};
   //  console.log(`search:post=${JSON.stringify(post)}`)
    await f6.ojax({method: 'POST', url: '/post'}, search)
    // await list()
   //  alert('before') 
-   await f6.go('post/list') // list #
+   await f6.go('list') // list #
   //  alert('after')
   }catch(error){
     console.log(error.stack)
@@ -57,6 +64,8 @@ async function list () {
     按人查詢：
    <p><input id="search_name" placeholder="請輸入人名。" name="姓名"></p>
    <p><input id="search_birthplace" placeholder="請輸入出生地。" name="出生地"></p>
+   <p><input id="search_birthyear" placeholder="請輸入生年。" name="生年"></p>
+   <p><input id="search_dieyear" placeholder="請輸入卒年。" name="卒年"></p>
       <p><input type="button" value="Search" onclick="search()"></p>
    </form>
    </div>
@@ -66,7 +75,7 @@ async function list () {
   <ul id="posts">
     ${posts.map(post => `
       <li>
-        <p><a href="#post/${post._id}">${post.姓名}</a></p>
+        <p><a href="#table/${post._id}">${post.姓名}</a></p>
       </li>
     `).join('\n')}
   </ul> 
@@ -88,8 +97,9 @@ async function table (m) {
   <th>姓名 <th>出生地 <th>生年 <th>卒年
   <tr>
   <td>${show.姓名}<td>${show.出生地}<td>${show.生年}<td>${show.卒年}
+
   </table>
-  <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html'">  
+  <input type="button" value="返回" onclick="location.href='http://localhost:3000/select_sys/main.html#list'">  
   `
 }
 

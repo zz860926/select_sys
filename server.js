@@ -49,15 +49,12 @@ async function searchdb (ctx) {
    input = ctx.request.body
   try{
        results = await collection.find(input).toArray()
-        // for(var i = 0; i <=results.length;i++){
-        //   results[i].id = i; 
-        // }
       // console.log(results);
     }catch(error){
         console.log(error)
      } 
 
-  ctx.body =  JSON.stringify(results)
+  ctx.body =  JSON.stringify(input)//?
 }
 
 async function main () {
