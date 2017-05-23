@@ -36,7 +36,7 @@ async function main () {
     }
     if(!search.姓名){delete search.姓名};
     if(!search.出生地){delete search.出生地};
-  //  console.log(`search:post=${JSON.stringify(post)}`)
+  //  console.log(`search:post=${JSON.stringify(search)}`)
    await f6.ojax({method: 'POST', url: '/post'}, search)
    // await list()
    await f6.go('post/list') // list #
