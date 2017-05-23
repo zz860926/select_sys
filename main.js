@@ -39,9 +39,7 @@ async function main () {
   //  console.log(`search:post=${JSON.stringify(post)}`)
    await f6.ojax({method: 'POST', url: '/post'}, search)
    // await list()
-  //  alert('before') 
    await f6.go('post/list') // list #
-  //  alert('after')
   }catch(error){
     console.log(error.stack)
   } 
