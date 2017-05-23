@@ -43,12 +43,10 @@ async function main () {
     if(!search.出生地){delete search.出生地};
     if(!search.生年){delete search.生年};
     if(!search.卒年){delete search.卒年};
-  //  console.log(`search:post=${JSON.stringify(post)}`)
+  //  console.log(`search:post=${JSON.stringify(search)}`)
    await f6.ojax({method: 'POST', url: '/post'}, search)
    // await list()
-  //  alert('before') 
    await f6.go('list') // list #
-  //  alert('after')
   }catch(error){
     console.log(error.stack)
   } 
