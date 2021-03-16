@@ -11,26 +11,23 @@
     "koa-static": "^3.0.0",
     "mongodb": "2.2.26"
   },
-  "debDepencies":{},
-  "scripts":{},
-  "repository": {},
-  "keywords": []
-,
-  "homepage": "https://github.com/zz860926/select_sys",
+  "debDepencies": {},
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/zz860926/select_sys.git"
   },
-  "contributors":
-   [
-     {"name": "Fong-An Liu"
-     ,"email": "zz860926@gmail.com/"
-     }
-  , {"name": "Chung-Chen Chen",
-      "email": "ccckmit@gmail.com"   
-     }
-   ],
-  
-  
-   "license": "UNLICENSED"
+  "keywords": [],
+  "homepage": "https://github.com/zz860926/select_sys",
+  "contributors": [
+    {
+      "name": "Fong-An Liu",
+      "email": "zz860926@gmail.com/"
+    },
+    {
+      "name": "Chung-Chen Chen",
+      "email": "ccckmit@gmail.com"
+    }
+  ],
+  "license": "UNLICENSED"
 }
