@@ -27,7 +27,7 @@ insert.js 把資料內容匯到資料庫時才要用
 The server started at 
 http://localhost:3000/select_sys/main.html
 
-<img src="image/search.png" width="300">
+<img src="image/search.PNG" width="300">
 
 ## 細節講解
 ###　第一階段
@@ -62,7 +62,7 @@ async function input () {
 ### 第二階段
 輸入想查詢的內容: <b>丁</b>
 
-<img src="image/search_detail.png" width="300">
+<img src="image/search_detail.PNG" width="300">
 
 如果搜尋search點擊下去會執行
 ```js
@@ -93,7 +93,7 @@ await f6.ojax({method: 'POST', url: '/post'}, search)
 ```
 這其中會把表格裡的內容傳到<b>server</b>端(server.js)去查詢，在cmd可以看到一下紀錄
 
-<img src="image/postcmd1.png" width="300">
+<img src="image/postcmd1.PNG" width="300">
 
 >server端做的事等下會再補充
 
@@ -187,7 +187,7 @@ results = await collection.find(input).toArray()
 
 例如點擊連結 <b>丁瑞圖</b>
 
-<img src="image/touchlink.png" width="500">
+<img src="image/touchlink.PNG" width="500">
 
 就會顯示更多內容
 
